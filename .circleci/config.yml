@@ -9,7 +9,7 @@ jobs:
     working_directory: ~/project
     environment:
       CC=/usr/bin/gcc-9
-      CXX=/usr/bin/gcc+9
+      CXX=/usr/bin/g++-9
     steps:
       - checkout
       - restore_cache:
