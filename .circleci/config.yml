@@ -8,7 +8,7 @@ jobs:
       CXX=/usr/bin/gcc+9
     steps:
       - checkout
-      - run: conan install . -s compiler:gcc
+      - run: conan install . -s compiler=gcc
       - run:
           command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
           working_dir: build
@@ -23,7 +23,7 @@ jobs:
       CXX=/usr/bin/gcc+9
     steps:
       - checkout
-      - run: conan install . -s compiler:gcc
+      - run: conan install . -s compiler=gcc
       - run:
           command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
           working_dir: build
