@@ -16,9 +16,8 @@ jobs:
           keys:
             - conan-cache-v1--{{ checksum "conanfile.txt" }}
             - conan-cache-v1
-          
       - run:
-          command: conan install .. -s build_type=Debug
+          command: conan install .. -s build_type=Debug compiler.libcxx=libstdc++11
           working_directory: build
       - save_cache:
           paths:
@@ -35,12 +34,3 @@ workflows:
   build_debug-and-test:
     jobs:
       - build_debug
-#      - test:
-#          requires:
-#            - build_debug
-#  build_release-and-upload_to_github:
-#    jobs:
-#      - build_release
-#      - upload_to_github:
-#          requires:
-#            - build_release
