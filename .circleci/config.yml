@@ -14,15 +14,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - conan-cache-v1--{{ checksum "conanfile.txt" }}
-            - conan-cache-v1
+            - conan-cache-v2--{{ checksum "conanfile.txt" }}
+            - conan-cache-v2
       - run:
           command: conan install .. -s build_type='Debug' -s compiler=gcc -s compiler.version=9 -s compiler.libcxx='libstdc++11' -g=cmake -b=missing 
           working_directory: build
       - save_cache:
           paths:
             - ~/.conan
-          key: conan-cache-v1--{{ checksum "conanfile.txt" }}
+          key: conan-cache-v2--{{ checksum "conanfile.txt" }}
       - run:
           command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
           working_directory: build
