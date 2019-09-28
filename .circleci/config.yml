@@ -8,29 +8,15 @@ jobs:
       CXX=/usr/bin/gcc+9
     steps:
       - checkout
-      - run: conan install . -s compiler=gcc
+      - run:
+          command: conan install . -s compiler=gcc
+          working_dir: build
       - run:
           command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
           working_dir: build
       - run:
           command:  cmake --build .
           working_dir: build
-  build_release:
-    docker:
-      - image: urnm1/devenv:latest
-    environment:
-      CC=/usr/bin/gcc-9
-      CXX=/usr/bin/gcc+9
-    steps:
-      - checkout
-      - run: conan install . -s compiler=gcc
-      - run:
-          command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Release ..
-          working_dir: build
-      - run:
-          command:  cmake --build .
-          working_dir: build
-    
 workflows:
   version: 2
   build_debug-and-test:
@@ -39,9 +25,9 @@ workflows:
 #      - test:
 #          requires:
 #            - build_debug
-  build_release-and-upload_to_github:
-    jobs:
-      - build_release
+#  build_release-and-upload_to_github:
+#    jobs:
+#      - build_release
 #      - upload_to_github:
 #          requires:
 #            - build_release
