@@ -12,9 +12,18 @@ jobs:
       CXX=/usr/bin/gcc+9
     steps:
       - checkout
+      - restore_cache:
+        keys:
+          - conan-cache-v1--{{ checksum "conanfile.py" }}
+          - conan-cache-v1
+          
       - run:
-          command: conan install .. -s compiler=gcc
+          command: conan install .. -s build_type=Debug
           working_directory: build
+      - save_cache:
+        paths:
+          - ~/.conan
+        key: conan-cache-v1--{{ checksum "conanfile.py" }}
       - run:
           command: cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug ..
           working_directory: build
