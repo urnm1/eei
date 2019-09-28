@@ -1,5 +1,7 @@
 [requires]
 bzip2/1.0.6@conan/stable
 qt/5.12.5@bincrafters/stable
+[options]
+qt:with_sqlite3=False
 [generators]
 cmake
