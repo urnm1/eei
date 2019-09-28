@@ -19,7 +19,7 @@ jobs:
       - run: conan profile new default --detect
       - run: conan remote add bincrafters-public-conan https://api.bintray.com/conan/bincrafters/public-conan
       - run:
-          command: conan install .. -s build_type='Debug' -g=cmake -b=missing 
+          command: conan install .. -s build_type='Debug' -g=cmake -b=cascade 
           working_directory: build
       - save_cache:
           paths:
