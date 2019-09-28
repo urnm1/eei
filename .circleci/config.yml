@@ -17,7 +17,7 @@ jobs:
             - conan-cache-v1--{{ checksum "conanfile.txt" }}
             - conan-cache-v1
       - run:
-          command: conan install .. -s build_type=Debug compiler.libcxx=libstdc++11
+          command: conan install -g CMake -s build_type=Debug -s compiler.libcxx=libstdc++11 --build=missing ..
           working_directory: build
       - save_cache:
           paths:
